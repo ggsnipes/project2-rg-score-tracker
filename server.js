@@ -24,6 +24,14 @@ app.use(
     })
 )
 
+app.get("/", (req, res) => {
+    res.render("index")
+})
+
+app.use(userController)
+app.use(sessionController)
+
+
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`)

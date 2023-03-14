@@ -28,7 +28,7 @@ router.post("/users", (req, res) => {
 
     db.query(sqlCheck, (err, dbRes) => {
         if(err){
-            const sql = `INSERT INTO users VALUES ('$1, '$2');`
+            const sql = `INSERT INTO users VALUES ('$1, '$2', '$3');`
             sqlSignUp(username, email, password)
             res.redirect("/")
         } else {
