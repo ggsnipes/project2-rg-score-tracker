@@ -4,7 +4,7 @@ create table songs(
     id serial primary key,
     name text,
     difficulty integer,
-    score integer
+    scores integer
 );
 
 create table users(
