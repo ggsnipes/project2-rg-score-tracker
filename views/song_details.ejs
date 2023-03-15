@@ -5,6 +5,9 @@
 <p><%= song.scores %></p>
 
 <form action="/songs/<%= song.id %>" method="post">
-    <input type="hidden" name="_method" value="put">
-    
+    <!-- <input type="hidden" name="_method" value="put"> -->
+    <label>Score</label>
+    <input type="number" name="score">
+    <input type="hidden" name="song_id" value="<%= song.id %>">
+    <button>Update Score</button>
 </form>

@@ -11,9 +11,7 @@ create table users(
     id serial primary key,
     username text,
     email text,
-    password_digest text,
-
-);
+    password_digest text);
 
 
 insert into songs (name, difficulty, maxnotes) values ('Blue Bird feat. Kanae Asaba', 8, 900);

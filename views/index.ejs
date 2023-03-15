@@ -15,13 +15,15 @@
         <a href="/users/new">Sign Up</a>
     </nav>
 
+    <p>Logged in as: </p>
+
     <section class="songs">
         <% for (let song of songs) { %>
       
         <div>
           <h2><a href="/songs/<%= song.id %>"><%= song.name %></a></h2>
-          <p><%= song.difficulty %></p>
-          <p><%= song.scores %></p>
+          <p>LEVEL: <%= song.difficulty %></p>
+          <p>SCORE: <%= song.scores %></p>
         </div>
       
         <% } %>

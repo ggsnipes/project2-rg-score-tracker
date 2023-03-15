@@ -6,7 +6,7 @@ const ensureLoggedIn = require("./../middleware/ensure_logged_in")
 const db = require("./../db/database")
 
 router.get("/", (req, res) => {
-  const sql = "SELECT id, name, difficulty, scores FROM songs;"
+  const sql = "SELECT id, name, difficulty, scores FROM songs ORDER BY id asc;"
 
   db.query(sql, (err, dbRes) => {
     const songs = dbRes.rows
@@ -25,7 +25,6 @@ router.get("/", (req, res) => {
 
 router.get("/songs/:id", ensureLoggedIn, (req, res) => {
   const sql = `select id, name, scores from songs where id = $1;`
-  console.log(sql)
 
   db.query(sql, [req.params.id], (err, dbRes) => {
     if (err) {
@@ -56,31 +55,29 @@ router.post("/songs", ensureLoggedIn, (req, res) => {
 
 
 
-router.get("/songs/:song_id/edit", (req, res) => {
+// router.get("/songs/:song_id/edit", (req, res) => {
 
-  const sql = `SELECT * FROM songs WHERE id = $1;`
+//   const sql = `SELECT * FROM songs WHERE id = $1;`
 
-  db.query(sql, [req.params.song_id], (err, dbRes) => {
-    if (err) {
-      console.log(err)
-    } else {
-      const song = dbRes.rows[0]
-      res.render("edit_song", { song: song })
-    }
-  })
-})
-
-
+//   db.query(sql, [req.params.song_id], (err, dbRes) => {
+//     if (err) {
+//       console.log(err)
+//     } else {
+//       const song = dbRes.rows[0]
+//       res.render("edit_song", { song: song })
+//     }
+//   })
+// })
 
 
-router.put("/songs/:song_id", (req, res) => {
-  const sql = `UPDATE songs SET score = $1 WHERE id = $2;`
 
-  db.query(
-    sql,
-    [req.body.scores, req.params.song_id],
-    (err, dbRes) => {
-      res.redirect(`/songs/${req.params.song_id}`)
+
+router.post("/songs/:song_id", (req, res) => {
+    const songId = req.body.song_id
+    const scores = req.body.score
+    db.query(updateSql(songId, scores), (err, dbRes) => {
+        console.log(err)
+        res.redirect(`/`)
     }
   )
 })
@@ -92,5 +89,13 @@ router.put("/songs/:song_id", (req, res) => {
 //     res.redirect("/")
 //   })
 // })
+
+
+function updateSql (songId, score) {
+
+return `UPDATE songs SET scores = ${score} WHERE id = ${songId}`
+
+}
+
 
 module.exports = router
