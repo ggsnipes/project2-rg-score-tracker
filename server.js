@@ -5,7 +5,7 @@ const session = require('express-session')
 
 const sessionController = require('./controllers/session_controller')
 const userController = require('./controllers/user_controller')
-
+const songController = require('./controllers/song_controller')
 
 const logger = require("./middleware/logger")
 
@@ -24,10 +24,11 @@ app.use(
     })
 )
 
-app.get("/", (req, res) => {
-    res.render("index")
-})
+// app.get("/", (req, res) => {
+//     res.render("index")
+// })
 
+app.use(songController)
 app.use(userController)
 app.use(sessionController)
 

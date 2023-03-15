@@ -7,26 +7,25 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>IIDX SCORE TRACKER</h1>
+    <% if (isLoggedIn()) { %>
+        <form action="/sessions" method="post">
+          <input type="hidden" name="_method" value="delete" />
+          <button>logout</button>
+        </form>
+        <p>logged in as <%= currentUser.username %></p>
+    <% } %>
 
-
-    <nav>
-        <a href="/login">Login</a>
-        <a href="/users/new">Sign Up</a>
-    </nav>
 
     <section class="songs">
         <% for (let song of songs) { %>
-      
+          
         <div>
           <h2><a href="/songs/<%= song.id %>"><%= song.name %></a></h2>
           <p><%= song.difficulty %></p>
           <p><%= song.scores %></p>
         </div>
-      
-        <% } %>
-      </section>
-      
-
+          
+       <% } %>
+    </section>
 </body>
 </html>
