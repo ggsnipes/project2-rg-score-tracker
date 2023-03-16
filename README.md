@@ -6,10 +6,11 @@ Quick summary of this is that it will track scores from a person and show their 
 - Find a way to list all the songs without needing too much work
 - Also need to learn how to read scores from a person's input either manually or importing a database/csv file.
 
-## TODO
+## Wireframe
 
-- have a functional website that can use for signing in and testing out that the app works
-- make something to work by the end of tonight.
+This is what the wireframe for this project seemed to look like, mainly had issues trying to get the scores to show properly for other players.
+
+![Wireframe](https://cdn.discordapp.com/attachments/524925957883297793/1086065761631604897/IMG_9027.jpg)
 
 
 ## Website Link
