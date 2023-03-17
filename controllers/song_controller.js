@@ -6,7 +6,8 @@ const ensureLoggedIn = require("./../middleware/ensure_logged_in")
 const db = require("./../db/database")
 
 router.get("/", (req, res) => {
-  const sql = "SELECT id, name, difficulty, scores FROM songs ORDER BY id asc;"
+  const sql = `SELECT id, name, difficulty, scores FROM songs ORDER BY id asc;
+  select id from users;`
 
   db.query(sql, (err, dbRes) => {
     const songs = dbRes.rows
@@ -21,7 +22,8 @@ router.get("/", (req, res) => {
 
 
 router.get("/songs/:id", ensureLoggedIn, (req, res) => {
-  const sql = `select id, name, scores from songs where id = $1;`
+  const sql = `select id, name, scores from songs where id = $1;
+  select id, username from users;`
 
   db.query(sql, [req.params.id], (err, dbRes) => {
     if (err) {
@@ -38,8 +40,8 @@ router.get("/songs/:id", ensureLoggedIn, (req, res) => {
 
 router.post("/songs", ensureLoggedIn, (req, res) => {
   const sql = `
-    INSERT INTO songs (scores) 
-    VALUES ($1) WHERE id = ${req.body.id};
+    INSERT INTO scores (score, user_id, song_id) 
+    VALUES ($1, $2, $3) WHERE song_id = ${req.body.id};
   `
 
   db.query(sql, (err, dbRes) => {
@@ -62,7 +64,13 @@ router.post("/songs/:song_id", (req, res) => {
   )
 })
 
+// router.delete("/songs/:dish_id", (req, res) => {
+//   const sql = `DELETE FROM songs WHERE id = $1;`
 
+//   db.query(sql, [req.params.dish_id], (err, dbRes) => {
+//     res.redirect("/")
+//   })
+// })
 
 
 function updateSql (songId, score) {

@@ -15,6 +15,15 @@ create table users(
     password_digest text
 );
 
+create table scores(
+    score_id serial primary key,
+    song_id integer,
+    user_id integer,
+    score integer
+);
+
+
+
 -- probably needed a 3rd table for proper score tracking, but there are multiple issues just having songs stored on a local server either way
 
 
