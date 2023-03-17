@@ -17,9 +17,6 @@ router.get("/", (req, res) => {
 
 
 
-// router.get("/songs/new", ensureLoggedIn, (req, res) => {
-//   res.render("new_song")
-// })
 
 
 
@@ -55,23 +52,6 @@ router.post("/songs", ensureLoggedIn, (req, res) => {
 
 
 
-// router.get("/songs/:song_id/edit", (req, res) => {
-
-//   const sql = `SELECT * FROM songs WHERE id = $1;`
-
-//   db.query(sql, [req.params.song_id], (err, dbRes) => {
-//     if (err) {
-//       console.log(err)
-//     } else {
-//       const song = dbRes.rows[0]
-//       res.render("edit_song", { song: song })
-//     }
-//   })
-// })
-
-
-
-
 router.post("/songs/:song_id", (req, res) => {
     const songId = req.body.song_id
     const scores = req.body.score
@@ -82,13 +62,7 @@ router.post("/songs/:song_id", (req, res) => {
   )
 })
 
-// router.delete("/songs/:dish_id", (req, res) => {
-//   const sql = `DELETE FROM songs WHERE id = $1;`
 
-//   db.query(sql, [req.params.dish_id], (err, dbRes) => {
-//     res.redirect("/")
-//   })
-// })
 
 
 function updateSql (songId, score) {

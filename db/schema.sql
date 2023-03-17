@@ -1,17 +1,23 @@
-createdb scoretracker
+CREATE DATABASE scoretracker
 
 create table songs(
     id serial primary key,
     name text,
     difficulty integer,
     scores integer,
-    maxnotes integer);
+    maxnotes integer
+);
 
 create table users(
     id serial primary key,
     username text,
     email text,
-    password_digest text);
+    password_digest text
+);
+
+-- probably needed a 3rd table for proper score tracking, but there are multiple issues just having songs stored on a local server either way
+
+
 
 
 insert into songs (name, difficulty, maxnotes) values ('Blue Bird feat. Kanae Asaba', 8, 900);
